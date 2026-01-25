@@ -89,4 +89,45 @@
 
   prev?.addEventListener("click", () => scrollByCard(-1));
   next?.addEventListener("click", () => scrollByCard(1));
+
+  // ===== Date: default today + min today + block Sunday =====
+  const dateField = document.getElementById("dateField");
+  const dateWarning = document.getElementById("dateWarning");
+  const submitBtn = document.querySelector(".msubmit");
+
+  const toISODate = (d) => {
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    const dd = String(d.getDate()).padStart(2, "0");
+    return `${yyyy}-${mm}-${dd}`;
+  };
+
+  const checkSunday = () => {
+    if (!dateField) return;
+
+    const val = dateField.value;
+    if (!val) return;
+
+    const selected = new Date(val + "T00:00:00");
+    const isSunday = selected.getDay() === 0; // Sunday = 0
+
+    if (dateWarning) dateWarning.hidden = !isSunday;
+    if (submitBtn) submitBtn.disabled = isSunday;
+
+    if (submitBtn) {
+      submitBtn.style.opacity = isSunday ? "0.5" : "1";
+      submitBtn.style.cursor = isSunday ? "not-allowed" : "pointer";
+    }
+  };
+
+  if (dateField) {
+    const today = new Date();
+    const iso = toISODate(today);
+
+    dateField.min = iso;
+    dateField.value = iso;
+
+    checkSunday();
+    dateField.addEventListener("change", checkSunday);
+  }
 })();
