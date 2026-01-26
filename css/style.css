@@ -356,45 +356,64 @@ body{
    ========================= */
 
 .reviews{
-  padding:14px 12px 90px;
+  padding:14px 12px 30px;
 }
 
 .bubbles{
   display:grid;
-  gap:72px; /* место под dots + имя */
+  grid-template-columns: 1fr 1fr;
+  column-gap: 22px;
+  row-gap: 30px;              /* основной ряд можно держать небольшим */
+  align-items:start;
 }
 
 /* bubble base */
 .bubble{
   position:relative;
-  background: rgba(214,162,74,.18); /* лёгкий gold */
+  background: var(--bg);
   border:3px solid #000;
-  border-radius:999px;
   padding:14px 16px;
   line-height:1.25;
-  box-shadow:0 12px 26px rgba(0,0,0,.08);
+  box-shadow:0 14px 28px rgba(0,0,0,.10);
+  max-width:100%;
+  text-align: center;
 
-  /* reveal on scroll */
+  /* ВАЖНО: резервируем место под dots+имя (чтобы не наезжали друг на друга) */
+  margin-bottom: 74px;
+
+  /* переносы длинных слов/строк */
+  overflow-wrap:anywhere;
+  word-break:normal;
+
+  /* reveal */
   opacity:0;
   transform: translateY(14px) scale(.98);
   transition: opacity .55s ease, transform .55s ease;
   will-change: opacity, transform;
 }
-
 .bubble.is-in{
   opacity:1;
   transform: translateY(0) scale(1);
 }
 
-/* left/right placement */
+/* columns + лёгкая диагональ (но без пересечений) */
 .bubble--left{
+  grid-column:1;
   justify-self:start;
   text-align:left;
+  margin-left: 6px;
 }
-
 .bubble--right{
+  grid-column:2;
   justify-self:end;
   text-align:right;
+  margin-top:-10px;           /* лёгкая “комикс”-хаотичность */
+  margin-right: 6px;
+}
+
+.bubble--left,
+.bubble--right{
+  text-align: center;
 }
 
 /* thinking dots (2 dots) */
@@ -402,88 +421,64 @@ body{
   content:"";
   position:absolute;
   bottom:-22px;
-  width:10px;
-  height:10px;
+  width:10px; height:10px;
   border-radius:999px;
-  background: rgba(214,162,74,.18);
+  background: rgba(214,162,74,.16);
   border:3px solid #000;
 }
-
 .bubble::before{
   content:"";
   position:absolute;
-  bottom:-36px;
-  width:6px;
-  height:6px;
+  bottom:-38px;
+  width:6px; height:6px;
   border-radius:999px;
-  background: rgba(214,162,74,.18);
+  background: rgba(214,162,74,.16);
   border:3px solid #000;
 }
-
-/* dot placement */
 .bubble--left::after{ left:34px; }
 .bubble--left::before{ left:20px; }
-
 .bubble--right::after{ right:34px; }
 .bubble--right::before{ right:20px; }
 
-/* name outside bubble (under dots) */
+/* names outside — bigger + CAPS, aligned under tail */
 .bubble-name{
   position:absolute;
-  bottom:-74px; /* ниже dots, чтобы не наезжало */
+  bottom:-66px;               /* ниже кружков */
   font-weight:900;
-  font-size:13px;
+  font-size:16px;
+  letter-spacing:.10em;
+  text-transform:uppercase;
   color:#000;
   line-height:1;
   width:max-content;
 }
 
-/* align name under dot "tail" center */
+/* центрируем имя под хвостом */
 .bubble--left .bubble-name{
-  left:28px;                  /* центр хвоста */
+  left:28px;
   transform: translateX(-50%);
-  text-align:left;
 }
-
 .bubble--right .bubble-name{
-  right:28px;                 /* центр хвоста */
+  right:28px;
   transform: translateX(50%);
-  text-align:right;
 }
 
-/* ===== Reviews: mobile compact (gentle overlap) ===== */
-.reviews{
-  padding:14px 12px 120px;
-}
+/* ===== разные формы (не одинаковые), как комикс ===== */
+.bubble:nth-of-type(1){ border-radius: 58px 78px 60px 84px; }
+.bubble:nth-of-type(2){ border-radius: 92px 56px 82px 58px; }
+.bubble:nth-of-type(3){ border-radius: 64px 96px 54px 72px; }
+.bubble:nth-of-type(4){ border-radius: 88px 62px 92px 52px; }
 
-.bubbles{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 18px;
-  row-gap: 44px;  /* было меньше — добавили воздуха */
-  align-items:start;
-}
+/* лёгкий поворот — живее, но безопасно */
+.bubble:nth-of-type(1){ transform: translateY(14px) rotate(-1.1deg) scale(.98); }
+.bubble:nth-of-type(2){ transform: translateY(14px) rotate( 1.0deg) scale(.98); }
+.bubble:nth-of-type(3){ transform: translateY(14px) rotate(-0.8deg) scale(.98); }
+.bubble:nth-of-type(4){ transform: translateY(14px) rotate( 0.9deg) scale(.98); }
 
-.bubble{
-  max-width:100%;
-}
-
-/* левый/правый */
-.bubble--left{
-  grid-column:1;
-  justify-self:start;
-}
-
-.bubble--right{
-  grid-column:2;
-  justify-self:end;
-  margin-top:-12px; /* было -22/-30 — теперь мягко */
-}
-
-/* имя чуть выше, чтобы не попадало под следующий bubble */
-.bubble-name{
-  bottom:-68px; /* было -74 */
-}
+.bubble:nth-of-type(1).is-in{ transform: translateY(0) rotate(-1.1deg) scale(1); }
+.bubble:nth-of-type(2).is-in{ transform: translateY(0) rotate( 1.0deg) scale(1); }
+.bubble:nth-of-type(3).is-in{ transform: translateY(0) rotate(-0.8deg) scale(1); }
+.bubble:nth-of-type(4).is-in{ transform: translateY(0) rotate( 0.9deg) scale(1); }
 
 /* Map */
 .map{ 
