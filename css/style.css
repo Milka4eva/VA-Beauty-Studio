@@ -467,7 +467,7 @@ body{
 
 .modal__top{ 
     text-align:center; 
-    padding-top:6px; 
+    padding-top:34px; 
 }
 
 .modal__h2{
@@ -506,12 +506,47 @@ body{
   appearance:none;
   -webkit-appearance:none;
   padding:10px 38px 10px 12px;
-  border-radius:0;              /* на скрине прямоугольники */
+  border-radius:0;
   border:2px solid rgba(255,255,255,.55);
   background:#fff;
-  color:#111;
+  color:#111;            /* <-- важно: всегда чёрный */
   font-weight:800;
+ }
+
+.mselect--gold select{
+  border-color: rgba(214,162,74,.85);
 }
+
+.mselect--gold .mplaceholder{
+  color: rgba(214,162,74,.92);
+}
+
+.mselect select:required:invalid{
+  color: transparent;
+}
+
+.mselect select option{
+  color: #111;
+}
+
+/* date wrapper for placeholder overlay */
+.mdate{ position:relative; }
+
+/* gold placeholder overlay (only when empty) */
+.mplaceholder{
+  position:absolute;
+  left:12px;
+  top:50%;
+  transform:translateY(-50%);
+  color: rgba(214,162,74,.90);
+  font-weight:900;
+  letter-spacing:.01em;
+  pointer-events:none;     /* чтобы клики проходили в select/input */
+  opacity:.9;
+}
+
+/* when we hide placeholder */
+.mplaceholder.is-hidden{ display:none; }
 
 .mselect::after{
   content:"";
@@ -525,15 +560,22 @@ body{
   pointer-events:none;
 }
 
+#dateField:required:invalid{
+  color: transparent;
+}
+#dateField:required:invalid::-webkit-datetime-edit{
+  color: transparent;
+}
+
 .minput{
-  width:100%;
-  padding:10px 12px;
-  border-radius:0;
-  border:2px solid rgba(255,255,255,.55);
-  background:#fff;
-  color:#111;
-  font-weight:700;
-  outline:none;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 0;
+  border: 2px solid rgba(214,162,74,.75);
+  background: var(--bg);
+  color: var(--black);
+  font-weight: 800;
+  outline: none;
 }
 
 .minput--ta{ 

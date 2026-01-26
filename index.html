@@ -158,37 +158,42 @@
 
       <form class="modal__form" id="bookingForm">
         <label class="mfield">
-          <span class="mfield__label">Elige un tratamiento</span>
-          <div class="mselect">
-            <select required>
-              <option value="" selected disabled>SELECCIONA EL SERVICIO</option>
-              <option>Manicura</option>
-              <option>Pedicura</option>
-              <option>Tratamiento</option>
-            </select>
-          </div>
-        </label>
+         <span class="mfield__label">Elige un tratamiento</span>
+         <div class="mselect mselect--gold">
+         <span class="mplaceholder" data-placeholder>SELECCIONA EL SERVICIO</span>
+         <select required name="service">
+            <option value="" selected disabled>SELECCIONA EL SERVICIO</option>
+            <option value="Manicura">Manicura</option>
+            <option value="Pedicura">Pedicura</option>
+            <option value="Tratamiento">Tratamiento</option>
+         </select>
+         </div>
+         </label>
 
         <label class="mfield">
-          <span class="mfield__label">Elige una fecha</span>
-          <input class="minput" id="dateField" type="date" required />
+         <span class="mfield__label">Elige una fecha</span>
+         <div class="mdate">
+         <span class="mplaceholder" data-date-placeholder>SELECCIONA LA FECHA</span>
+         <input class="minput" id="dateField" type="date" required />
+         </div>
         </label>
         <p class="mwarning" id="dateWarning" hidden>Domingo: cerrado</p>
 
         <label class="mfield">
-          <span class="mfield__label">Elige una hora</span>
-          <div class="mselect">
-            <select required>
-              <option value="" selected disabled>SELECCIONA LA HORA</option>
-              <option>10:00</option>
-              <option>11:00</option>
-              <option>12:00</option>
-              <option>13:00</option>
-              <option>16:00</option>
-              <option>17:00</option>
-              <option>18:00</option>
-            </select>
-          </div>
+         <span class="mfield__label">Elige una hora</span>
+         <div class="mselect mselect--gold">
+         <span class="mplaceholder" data-placeholder>SELECCIONA LA HORA</span>
+         <select required name="time">
+           <option value="" selected disabled>SELECCIONA LA HORA</option>
+           <option value="10:00">10:00</option>
+           <option value="11:00">11:00</option>
+           <option value="12:00">12:00</option>
+           <option value="13:00">13:00</option>
+           <option value="16:00">16:00</option>
+           <option value="17:00">17:00</option>
+           <option value="18:00">18:00</option>
+         </select>
+         </div>
         </label>
 
         <label class="mfield">

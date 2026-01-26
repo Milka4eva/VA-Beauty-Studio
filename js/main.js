@@ -125,9 +125,37 @@
     const iso = toISODate(today);
 
     dateField.min = iso;
-    dateField.value = iso;
 
     checkSunday();
     dateField.addEventListener("change", checkSunday);
+  }
+
+  // ===== Gold placeholder overlays for selects + date =====
+  const bindSelectPlaceholder = (wrap) => {
+    const sel = wrap.querySelector("select");
+    const ph = wrap.querySelector("[data-placeholder]");
+    if (!sel || !ph) return;
+
+    const update = () => {
+      ph.classList.toggle("is-hidden", sel.value !== "");
+    };
+
+    update();
+    sel.addEventListener("change", update);
+  };
+
+  document.querySelectorAll(".mselect").forEach(bindSelectPlaceholder);
+
+  // Date placeholder overlay
+  const dateWrap = document.querySelector(".mdate");
+  if (dateWrap) {
+    const dateInput = dateWrap.querySelector("#dateField");
+    const datePh = dateWrap.querySelector("[data-date-placeholder]");
+    const updDate = () => {
+      if (!dateInput || !datePh) return;
+      datePh.classList.toggle("is-hidden", !!dateInput.value);
+    };
+    updDate();
+    dateInput?.addEventListener("change", updDate);
   }
 })();
