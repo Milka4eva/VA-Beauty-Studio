@@ -27,11 +27,13 @@ body{
   font-family: var(--font);
   background:var(--bg);
   color:var(--text);
+  padding-bottom: 0;
 }
+
 .page{
   max-width:var(--maxw);
   margin:0 auto;
-  padding-bottom:72px;
+  padding-bottom: calc(50px + env(safe-area-inset-bottom));
 }
 
 /* Topbar */
@@ -179,93 +181,158 @@ body{
 
 /* Hero */
 .hero{ 
-    position:relative; 
-    border-bottom:1px solid var(--line); 
-    padding:16px 12px 8px; 
+  position:relative;
+  border-bottom:1px solid var(--line);
+  padding:16px 12px 8px;
+  min-height:320px; /* большой герой на мобилке */
 }
 
 .hero-bg{
-  position:absolute; inset:0;
-  background:
-    radial-gradient(1200px 500px at 30% 30%, rgba(214,162,74,.22), transparent 60%),
-    repeating-linear-gradient(120deg, rgba(214,162,74,.20) 0 1px, transparent 1px 12px),
-    #fff;
-  opacity:.35;
+  position:absolute;
+  inset:0;
+  background: url("/img/ornament.jpg") center/cover no-repeat;
+  opacity:1;
   pointer-events:none;
 }
 
-.hero-content{ 
-    position:relative; 
-    padding:22px 6px 10px; 
+.hero-content{
+  position:relative;
+  padding:40px 6px 10px; /* можешь оставить своё */
 }
 
-.hero h1{ 
-    margin:0; 
-    font-size:34px; 
-    line-height:1.05; 
-    font-weight:800; 
+/* Слайды друг над другом, показываем активный */
+.hero-slides{
+  position:relative;
+  min-height: 200px; /* чтобы высота не прыгала при смене текста */
+}
+
+.hero-slide{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transform:translateY(6px);
+  transition: opacity .45s ease, transform .45s ease;
+  pointer-events:none;
+}
+
+.hero-slide.is-active{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+
+/* Кружочки снизу */
+.hero-dots{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  margin-top:18px;
+}
+
+.hero-dot{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.35);
+  background:#fff;
+  padding:0;
+  cursor:pointer;
+  opacity:.9;
+}
+
+.hero-dot.is-active{
+  background: var(--gold);
+  border-color: rgba(0,0,0,.2);
+}
+
+.hero-slides{
+  touch-action: pan-y;   /* разрешаем вертикальный скролл, свайп по X ловим сами */
+  user-select: none;
 }
 
 /* Services */
-.services{ padding:18px 0 10px; }
+/* ===== Services carousel ===== */
+.services{
+  padding: 14px 12px 18px;
+}
+
 .services-wrap{
+  position: relative;
+}
+
+.svc-viewport{
+  overflow: hidden;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.svc-track{
+  display: flex;
+  gap: 16px;
+  will-change: transform;
+  transform: translateX(0);
+}
+
+.svc-card{
+  flex: 0 0 calc(50% - 8px); /* 2 карточки в ряд как в макете */
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.svc-img{
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+
+.svc-title{
+  text-align: center;
+  font-weight: 800;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.svc-price{
+  text-align: center;
+  font-weight: 900;
+  font-size: 20px;
+  margin-top: 2px;
+  margin-bottom: 10px;
+}
+
+.svc-desc{
+  margin: 0 10px 12px;
+  padding: 10px 10px;
+  background: rgba(214,162,74,.75);
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+/* стрелки */
+.svc-arrow{
+  position:absolute;
+  top: 44%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12);
+  cursor: pointer;
   display:grid;
-  grid-template-columns:44px 1fr 44px;
-  align-items:center;
-  gap:8px;
-  padding:0 8px;
+  place-items:center;
+  font-size: 34px;
+  line-height: 1;
+  z-index: 3;
 }
-.nav-arrow{
-  width:44px; height:44px;
-  border-radius:50%;
-  border:0;
-  background:transparent;
-  font-size:44px;
-  line-height:1;
-  cursor:pointer;
-  color:#000;
-  user-select:none;
-}
-.services-track{
-  display:flex;
-  gap:14px;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  padding:6px 4px 10px;
-  -webkit-overflow-scrolling:touch;
-}
-.service-card{
-  scroll-snap-align:start;
-  width:260px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  background:#fff;
-  overflow:hidden;
-  box-shadow:0 8px 18px rgba(0,0,0,.08);
-}
-.service-img{
-  height:240px;
-  background:
-    radial-gradient(260px 180px at 40% 30%, rgba(214,162,74,.25), transparent 60%),
-    linear-gradient(135deg, rgba(0,0,0,.08), rgba(0,0,0,.02));
-}
-.service-img--2{
-  background:
-    radial-gradient(260px 180px at 40% 30%, rgba(214,162,74,.18), transparent 60%),
-    linear-gradient(135deg, rgba(0,0,0,.06), rgba(0,0,0,.02));
-}
-.service-meta{ padding:10px 12px 14px; text-align:center; }
-.service-name{ font-weight:800; font-size:20px; }
-.service-price{ font-weight:900; font-size:26px; margin-top:2px; }
-.service-desc{
-  margin:10px auto 0;
-  width:92%;
-  padding:10px 10px;
-  border-radius:10px;
-  background:rgba(214,162,74,.85);
-  color:#2b1b00;
-  font-weight:700;
-}
+
+.svc-arrow--left{ left: -6px; }
+.svc-arrow--right{ right: -6px; }
 
 /* Banner */
 .banner{
@@ -352,9 +419,11 @@ body{
 /* Contact strip */
 .contact-strip{
   background:var(--black);
-  color:#fff;
+  color:var(--bg);
   padding:14px 12px 18px;
-  min-height:180px; /* высота блока, регулирует размер кнопок справа */
+  min-height:180px;
+  display:flex;
+  align-items:center;   /* центр по вертикали */
 }
 
 .contact-inner{
@@ -417,9 +486,9 @@ body{
   width:100%;
   height:100%;
   display:block;
-  margin:0;
-  padding:0;
   object-fit:cover; /* заполняет кнопку полностью */
+  transform: scale(1.35);   /* попробуй 1.2–1.6 */
+  transform-origin:center;
 }
 
 /* Bottom bar */

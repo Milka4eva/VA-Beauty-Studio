@@ -42,40 +42,77 @@
   <main class="page" id="top">
     <!-- HERO -->
     <section class="hero">
-      <div class="hero-bg" aria-hidden="true"></div>
-
+      <div class="hero-bg"></div>
       <div class="hero-content">
-        <h1>Nuevos clientes</h1>
+      <div class="hero-slides" id="heroSlides">
+        <div class="hero-slide is-active">
+          <h1>Nuevos clientes<br>tienen 20% de descuento<br>en todos servicios</h1>
+        </div>
+        <div class="hero-slide">
+          <h1>Manicura &amp; Pedicura<br>con máxima higiene<br>y calidad premium</h1>
+        </div>
+        <div class="hero-slide">
+          <h1>Reserva tu cita<br>rápido por WhatsApp<br>en 1 minuto</h1>
+        </div>
+        <div class="hero-slide">
+          <h1>Materiales eco<br>y productos de alta calidad<br>para tu cuidado</h1>
+        </div>
+        <div class="hero-slide">
+          <h1>Estamos en Palma<br>Carrer Albó, 4<br>Ponent</h1>
+        </div>
+      </div>
+      <div class="hero-dots" id="heroDots" aria-label="Hero slideshow controls">
+        <button class="hero-dot is-active" type="button" aria-label="Slide 1"></button>
+        <button class="hero-dot" type="button" aria-label="Slide 2"></button>
+        <button class="hero-dot" type="button" aria-label="Slide 3"></button>
+        <button class="hero-dot" type="button" aria-label="Slide 4"></button>
+        <button class="hero-dot" type="button" aria-label="Slide 5"></button>
+      </div>
       </div>
     </section>
 
     <!-- Services slider -->
     <section class="services" id="services">
-      <div class="services-wrap">
-        <button class="nav-arrow" type="button" id="prevService" aria-label="Previous">‹</button>
-
-        <div class="services-track" id="servicesTrack">
-          <article class="service-card">
-            <div class="service-img" aria-label="Manicura image"></div>
-            <div class="service-meta">
-              <div class="service-name">Manicura</div>
-              <div class="service-price">80 EUR</div>
-              <div class="service-desc">descripción del servicio<br>para los clientes</div>
-            </div>
-          </article>
-
-          <article class="service-card">
-            <div class="service-img service-img--2" aria-label="Pedicura image"></div>
-            <div class="service-meta">
-              <div class="service-name">Pedicura</div>
-              <div class="service-price">90 EUR</div>
-              <div class="service-desc">descripción del servicio<br>para los clientes</div>
-            </div>
-          </article>
-        </div>
-
-        <button class="nav-arrow" type="button" id="nextService" aria-label="Next">›</button>
-      </div>
+         <div class="services-wrap">
+         <button class="svc-arrow svc-arrow--left" type="button" aria-label="Previous service">
+             ‹
+         </button>
+             <div class="svc-viewport" id="svcViewport">
+             <div class="svc-track" id="svcTrack">
+               <!-- Slide 1 -->
+               <article class="svc-card">
+                 <img class="svc-img" src="/img/manicura.jpg" alt="Manicura">
+                 <div class="svc-title">Manicura</div>
+                 <div class="svc-price">80 EUR</div>
+                 <div class="svc-desc">descripción del servicio<br>para los clientes</div>
+               </article>       
+               <!-- Slide 2 -->
+               <article class="svc-card">
+                 <img class="svc-img" src="/img/pedicura.jpg" alt="Pedicura">
+                 <div class="svc-title">Pedicura</div>
+                 <div class="svc-price">90 EUR</div>
+                 <div class="svc-desc">descripción del servicio<br>para los clientes</div>
+               </article>       
+               <!-- Slide 3 -->
+               <article class="svc-card">
+                 <img class="svc-img" src="/img/cejas.jpg" alt="Cejas">
+                 <div class="svc-title">Cejas</div>
+                 <div class="svc-price">120 EUR</div>
+                 <div class="svc-desc">descripción del servicio<br>para los clientes</div>
+               </article>       
+               <!-- Slide 4 -->
+               <article class="svc-card">
+                 <img class="svc-img" src="/img/unas.jpg" alt="Uñas">
+                 <div class="svc-title">Uñas</div>
+                 <div class="svc-price">100 EUR</div>
+                 <div class="svc-desc">descripción del servicio<br>para los clientes</div>
+               </article>
+             </div>
+           </div>       
+           <button class="svc-arrow svc-arrow--right" type="button" aria-label="Next service">
+             ›
+           </button>       
+         </div>
     </section>
 
     <!-- Quality banner -->
@@ -125,7 +162,6 @@
        </iframe>
        </div>
     </section>
-
 
     <!-- Contact strip -->
     <section class="contact-strip">
@@ -233,5 +269,7 @@
   </div>
 
   <script src="/js/main.js"></script>
+  <script src="/js/hero.js"></script>
+  <script src="/js/services.js"></script>
 </body>
 </html>
