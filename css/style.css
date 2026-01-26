@@ -351,40 +351,30 @@ body{
   font-weight: 400; 
 }
 
-/* Reviews */
+/* =========================
+   REVIEWS (comic bubbles)
+   ========================= */
+
 .reviews{
-  padding:14px 12px 18px;
+  padding:14px 12px 90px;
 }
 
 .bubbles{
   display:grid;
-  gap:18px;
+  gap:72px; /* место под dots + имя */
 }
 
-/* контейнер одного отзыва */
-.bubble-wrap{
-  display:grid;
-  gap:8px;
-}
-
-.bubble-wrap.bubble--left{
-  justify-items:start;
-}
-
-.bubble-wrap.bubble--right{
-  justify-items:end;
-}
-
-/* сам пузырь */
+/* bubble base */
 .bubble{
   position:relative;
-  background: rgba(214,162,74,.18); /* лёгкий золотистый */
-  border:3px solid #000;            /* чёрные края */
+  background: rgba(214,162,74,.18); /* лёгкий gold */
+  border:3px solid #000;
   border-radius:999px;
   padding:14px 16px;
   line-height:1.25;
   box-shadow:0 12px 26px rgba(0,0,0,.08);
 
+  /* reveal on scroll */
   opacity:0;
   transform: translateY(14px) scale(.98);
   transition: opacity .55s ease, transform .55s ease;
@@ -396,7 +386,18 @@ body{
   transform: translateY(0) scale(1);
 }
 
-/* кружочки "thinking" снизу от облака (короткие — 1-2) */
+/* left/right placement */
+.bubble--left{
+  justify-self:start;
+  text-align:left;
+}
+
+.bubble--right{
+  justify-self:end;
+  text-align:right;
+}
+
+/* thinking dots (2 dots) */
 .bubble::after{
   content:"";
   position:absolute;
@@ -408,7 +409,6 @@ body{
   border:3px solid #000;
 }
 
-/* второй маленький кружок */
 .bubble::before{
   content:"";
   position:absolute;
@@ -420,21 +420,69 @@ body{
   border:3px solid #000;
 }
 
-/* левый хвост */
-.bubble-wrap.bubble--left .bubble::after{ left:34px; }
-.bubble-wrap.bubble--left .bubble::before{ left:20px; }
+/* dot placement */
+.bubble--left::after{ left:34px; }
+.bubble--left::before{ left:20px; }
 
-/* правый хвост */
-.bubble-wrap.bubble--right .bubble::after{ right:34px; }
-.bubble-wrap.bubble--right .bubble::before{ right:20px; }
+.bubble--right::after{ right:34px; }
+.bubble--right::before{ right:20px; }
 
-/* имя СНАРУЖИ */
+/* name outside bubble (under dots) */
 .bubble-name{
+  position:absolute;
+  bottom:-74px; /* ниже dots, чтобы не наезжало */
   font-weight:900;
   font-size:13px;
-  color:#000;      /* чёрным */
-  opacity:1;
+  color:#000;
   line-height:1;
+  width:max-content;
+}
+
+/* align name under dot "tail" center */
+.bubble--left .bubble-name{
+  left:28px;                  /* центр хвоста */
+  transform: translateX(-50%);
+  text-align:left;
+}
+
+.bubble--right .bubble-name{
+  right:28px;                 /* центр хвоста */
+  transform: translateX(50%);
+  text-align:right;
+}
+
+/* ===== Reviews: mobile compact (gentle overlap) ===== */
+.reviews{
+  padding:14px 12px 120px;
+}
+
+.bubbles{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 18px;
+  row-gap: 44px;  /* было меньше — добавили воздуха */
+  align-items:start;
+}
+
+.bubble{
+  max-width:100%;
+}
+
+/* левый/правый */
+.bubble--left{
+  grid-column:1;
+  justify-self:start;
+}
+
+.bubble--right{
+  grid-column:2;
+  justify-self:end;
+  margin-top:-12px; /* было -22/-30 — теперь мягко */
+}
+
+/* имя чуть выше, чтобы не попадало под следующий bubble */
+.bubble-name{
+  bottom:-68px; /* было -74 */
 }
 
 /* Map */
