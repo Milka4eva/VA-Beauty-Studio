@@ -190,7 +190,7 @@ body{
 .hero-bg{
   position:absolute;
   inset:0;
-  background: url("/img/ornament.jpg") center/cover no-repeat;
+  background: url("img/ornament.jpg") center/cover no-repeat;
   opacity:1;
   pointer-events:none;
 }
