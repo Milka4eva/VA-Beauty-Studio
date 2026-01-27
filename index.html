@@ -58,7 +58,7 @@
           <h1>Materiales eco<br>y productos de alta calidad<br>para tu cuidado</h1>
         </div>
         <div class="hero-slide">
-          <h1>Estamos en Palma<br>Carrer Albó, 4<br>Ponent</h1>
+          <h1>Estamos en Palma<br>Carrer Albó, 2<br>Local 3, Ponent</h1>
         </div>
       </div>
       <div class="hero-dots" id="heroDots" aria-label="Hero slideshow controls">
@@ -173,8 +173,9 @@
           <div class="contact-title"> <img class="pin-ic" src="img/pin.png" alt="" aria-hidden="true">VA Beauty Studio
           </div>
           <div class="contact-text">
-            Carrer Albó, 4, Ponent,<br>
-            07013 Palma, Illes Balears<br>
+            Carrer Albó 2, local 3, <br>
+            Ponent, 07013 Palma, <br>
+            Illes Balears<br>
             +34684301949<br>
             10:00 – 19:00
           </div>
@@ -210,62 +211,72 @@
         <div class="modal__h2" id="modalTitle">FORMULARIO DEL CONTACTO</div>
       </div>
 
-      <form class="modal__form" id="bookingForm">
-        <label class="mfield">
-         <span class="mfield__label">Elige un tratamiento</span>
-         <div class="mselect mselect--gold">
-         <span class="mplaceholder" data-placeholder>SELECCIONA EL SERVICIO</span>
-         <select required name="service">
-            <option value="" selected disabled>SELECCIONA EL SERVICIO</option>
-            <option value="Manicura">Manicura</option>
-            <option value="Pedicura">Pedicura</option>
-            <option value="Tratamiento">Tratamiento</option>
-         </select>
-         </div>
-         </label>
+      <form class="modal__form" id="bookingForm"
+      action="https://formsubmit.co/mila.petruk@gmail.com"
+      method="POST">
 
+        <!-- Настройки FormSubmit -->
+        <input type="hidden" name="_subject" value="Nueva cita — VA Beauty Studio">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <!-- Можно потом заменить на страницу thank-you -->
+        <input type="hidden" name="_next" value="https://milka4eva.github.io/VA-Beauty-Studio/">
+      
         <label class="mfield">
-         <span class="mfield__label">Elige una fecha</span>
-         <div class="mdate">
-         <span class="mplaceholder" data-date-placeholder>SELECCIONA LA FECHA</span>
-         <input class="minput" id="dateField" type="date" required />
-         </div>
+          <span class="mfield__label">Elige un tratamiento</span>
+          <div class="mselect mselect--gold">
+            <span class="mplaceholder" data-placeholder>SELECCIONA EL SERVICIO</span>
+            <select required name="service">
+              <option value="" selected disabled>SELECCIONA EL SERVICIO</option>
+              <option value="Manicura">Manicura</option>
+              <option value="Pedicura">Pedicura</option>
+              <option value="Tratamiento">Tratamiento</option>
+            </select>
+          </div>
         </label>
+      
+        <label class="mfield">
+          <span class="mfield__label">Elige una fecha</span>
+          <div class="mdate">
+            <span class="mplaceholder" data-date-placeholder>SELECCIONA LA FECHA</span>
+            <input class="minput" id="dateField" type="date" name="date" required />
+          </div>
+        </label>
+      
         <p class="mwarning" id="dateWarning" hidden>Domingo: cerrado</p>
-
+      
         <label class="mfield">
-         <span class="mfield__label">Elige una hora</span>
-         <div class="mselect mselect--gold">
-         <span class="mplaceholder" data-placeholder>SELECCIONA LA HORA</span>
-         <select required name="time">
-           <option value="" selected disabled>SELECCIONA LA HORA</option>
-           <option value="10:00">10:00</option>
-           <option value="11:00">11:00</option>
-           <option value="12:00">12:00</option>
-           <option value="13:00">13:00</option>
-           <option value="16:00">16:00</option>
-           <option value="17:00">17:00</option>
-           <option value="18:00">18:00</option>
-         </select>
-         </div>
+          <span class="mfield__label">Elige una hora</span>
+          <div class="mselect mselect--gold">
+            <span class="mplaceholder" data-placeholder>SELECCIONA LA HORA</span>
+            <select required name="time">
+              <option value="" selected disabled>SELECCIONA LA HORA</option>
+              <option value="10:00">10:00</option>
+              <option value="11:00">11:00</option>
+              <option value="12:00">12:00</option>
+              <option value="13:00">13:00</option>
+              <option value="16:00">16:00</option>
+              <option value="17:00">17:00</option>
+              <option value="18:00">18:00</option>
+            </select>
+          </div>
         </label>
-
+      
         <label class="mfield">
           <span class="mfield__label">Tu nombre y apellido</span>
-          <input class="minput" type="text" required />
+          <input class="minput" type="text" name="name" required />
         </label>
-
+      
         <label class="mfield">
           <span class="mfield__label">Telefono del contacto</span>
-          <input class="minput" type="tel" required />
+          <input class="minput" type="tel" name="phone" required />
         </label>
-
+      
         <label class="mfield">
           <span class="mfield__label">Tu mensaje</span>
-          <textarea class="minput minput--ta" rows="4"></textarea>
+          <textarea class="minput minput--ta" rows="4" name="message"></textarea>
         </label>
-
-        <button class="msubmit" type="submit">ENVIAR LOS DATOS DE CITA</button>
+         <button class="msubmit" type="submit">ENVIAR LOS DATOS DE CITA</button>
         <p class="mstatus" id="formStatus" aria-live="polite"></p>
       </form>
     </div>

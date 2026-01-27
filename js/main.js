@@ -66,13 +66,63 @@
   // Prevent clicks inside panel from closing (backdrop has handler)
   modal?.querySelector(".modal__panel")?.addEventListener("click", (e) => e.stopPropagation());
 
-  // Demo submit
+  // Real submit via FormSubmit (AJAX) + status
   const form = document.getElementById("bookingForm");
   const status = document.getElementById("formStatus");
-  form?.addEventListener("submit", (e) => {
+
+  form?.addEventListener("submit", async (e) => {
     e.preventDefault();
-    if (status) status.textContent = "Enviado (demo). Luego conectamos WhatsApp / email.";
-    form.reset();
+
+    if (!form.action) {
+      if (status) status.textContent = "Error: no hay action en el formulario.";
+      return;
+    }
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    try {
+      if (submitBtn) submitBtn.disabled = true;
+      if (status) status.textContent = "Enviando…";
+
+      const fd = new FormData(form);
+
+      const res = await fetch(form.action, {
+        method: "POST",
+        body: fd,
+        headers: { "Accept": "application/json" }
+      });
+
+      if (res.ok) {
+        if (status) status.textContent = "✅ Gracias! Hemos recibido tu solicitud.";
+        form.reset();
+
+        // обновим плейсхолдеры/оверлеи, если нужно
+        document.querySelectorAll(".mselect").forEach((wrap) => {
+          const sel = wrap.querySelector("select");
+          const ph = wrap.querySelector("[data-placeholder]");
+          if (sel && ph) ph.classList.toggle("is-hidden", sel.value !== "");
+        });
+
+        const dateWrap = document.querySelector(".mdate");
+        if (dateWrap) {
+          const dateInput = dateWrap.querySelector("#dateField");
+          const datePh = dateWrap.querySelector("[data-date-placeholder]");
+          if (dateInput && datePh) datePh.classList.toggle("is-hidden", !!dateInput.value);
+        }
+
+        // закрыть модалку через небольшую паузу
+        setTimeout(() => {
+          if (typeof closeModal === "function") closeModal();
+          if (status) status.textContent = "";
+        }, 1400);
+      } else {
+        if (status) status.textContent = "❌ Error al enviar. Inténtalo de nuevo.";
+      }
+    } catch (err) {
+      if (status) status.textContent = "❌ Error de conexión. Inténtalo de nuevo.";
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+    }
   });
 
   // ===== Services slider arrows =====
