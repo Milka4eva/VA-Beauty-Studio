@@ -298,7 +298,7 @@ body{
 .svc-price{
   text-align: center;
   font-weight: 900;
-  font-size: 20px;
+  font-size: 16px;
   margin-top: 2px;
   margin-bottom: 10px;
 }
@@ -310,6 +310,38 @@ body{
   border-radius: 10px;
   font-size: 14px;
   line-height: 1.25;
+}
+
+/* List inside service card (replaces .svc-desc) */
+.svc-list{
+  margin:10px 0 0;
+  padding:12px 14px;
+  list-style:none;
+
+  background:rgba(214,162,74,.35);
+  border-radius:12px;
+
+  font-size:14px;
+  line-height:1.25;
+  color:#2b1b00;
+}
+
+.svc-list li{
+  position:relative;
+  padding-left:14px;
+}
+
+.svc-list li + li{
+  margin-top:6px;
+}
+
+.svc-list li::before{
+  content:"•";
+  position:absolute;
+  left:0;
+  top:0;
+  font-weight:900;
+  color:#2b1b00;
 }
 
 /* стрелки */
